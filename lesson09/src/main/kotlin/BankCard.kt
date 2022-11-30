@@ -1,29 +1,18 @@
-open class BankCard (balance: Int) {
-    var balance_: Int
+open abstract class BankCard (balance: Int) {
+    protected var balance_ = balance
 
-    init {
-        balance_ = balance
-    }
-    open fun addBalance() {
-        val addMoney = 10
-        balance_ = balance_ + addMoney
-    }
+    abstract fun addMoney(value: Int)
 
-    open fun pay(): Boolean {
-        val costGoods = 50
-        balance_ = balance_ - costGoods
-        if (balance_ >= 0) {
-            println("purchase completed")
-            return true
-        }
-        else
-            println("not enought money")
-            return false
-    }
+    abstract fun pay(value: Int): Boolean
 
     open fun infoBalance () {
         println("on your account ${balance_} rubles")
     }
+    public fun getBalance (): Int {
+        return balance_
+    }
 
-    fun infoAboutAvalibaleFunds() {}
+    open fun infoAboutAvalibaleFunds() {
+        infoBalance()
+    }
 }

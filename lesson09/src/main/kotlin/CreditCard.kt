@@ -1,49 +1,40 @@
-class CreditCard (balance: Int, creditLimit: Int): BankCard (balance) {
-    var creditLimit_ = creditLimit
-    var credit = creditLimit
-    val maxCreditLimit = 1000
+class CreditCard (balance: Int, credit: Int): BankCard (balance) {
+    var credit_ = credit
+    private val MAX_CREDIT_LIMIT_ = 10000
+
     init {
-        balance_ = balance
-        creditLimit_ = creditLimit
+        if (credit_ < MAX_CREDIT_LIMIT_ && balance_ > 0) {
+            throw IllegalArgumentException ("Bad Argument")
+        }
     }
-          override fun addBalance() {
-//          super.addBalance()
-          val addMoney = 1000
-          if (creditLimit_ <= credit) {
-            creditLimit_ = (creditLimit_ + addMoney) - credit
-          }
-          if (creditLimit_ == maxCreditLimit) {
-            balance_ = balance_ + addMoney
-          }
-          if (creditLimit_ >= maxCreditLimit) {
-              balance_ = (addMoney - ((creditLimit_ + addMoney) - credit)) + balance_
-          }
-      }
+    override fun addMoney(value: Int) {
+        val addMoney = value
+        var newCredit = credit_ + addMoney
+        var overMoney = newCredit - MAX_CREDIT_LIMIT_
+        if (overMoney > 0) {
+            balance_ = balance_ + overMoney
+            credit_ = MAX_CREDIT_LIMIT_
+        } else {
+            check(balance_ == 0)
+            credit_ = newCredit
+        }
+    }
 
+    override fun pay(value: Int): Boolean {
+        val payMoney = 8000
+        var newBalance = balance_ - payMoney
+        if (newBalance >= 0) {
+            balance_ = newBalance
+        } else {
+            balance_ = 0
+            credit_ = credit_ + newBalance
+        }
+        return true
+    }
 
+    override fun infoAboutAvalibaleFunds() {
+        super.infoAboutAvalibaleFunds()
+        println("your credit limit is ${credit_}")
+    }
 }
-//    var CREDITLIMIT = 500
-//
-//
-//    init {
-//        balance_ = balance
-//
-//    }
-//      override fun addBalance() {
-////          super.addBalance()
-//          val addMoney = 600
-//          if (CREDITLIMIT <= 0) {
-//            CREDITLIMIT = CREDITLIMIT + addMoney
-//          }
-//          if (CREDITLIMIT == 500) {
-//            balance_ = balance_ + addMoney
-//          }
-//          if (CREDITLIMIT > 500) {
-//              balance_ = (CREDITLIMIT - 500) + balance_
-//          }
-//      }
-//    }
-//    override fun pay (): Boolean {
-//        super.pay()
-//
-//    }
+

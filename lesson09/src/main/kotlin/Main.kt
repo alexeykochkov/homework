@@ -1,14 +1,17 @@
+fun printInfo (bankCard: BankCard) {
+    bankCard.infoAboutAvalibaleFunds()
+}
 fun main(args: Array<String>) {
-    val myBanckCard = BankCard (100)
-    val myCreditCard = CreditCard (balance = 0, 200)
-    myCreditCard.addBalance()
-
-    println("your balance is ${myCreditCard.balance_}")
-    println("your credit limit is ${myCreditCard.creditLimit_}")
-//    myBanckCard.addBalance()
-//    myBanckCard.pay()
-//    myBanckCard.pay()
-//    myBanckCard.pay()
-//    myBanckCard.infoBalance()
-
+    run {
+        val card = DebitCard (100)
+        printInfo(card)
+        println("[!]")
+   }
+    run {
+        val card = CreditCard (balance = 0, 10000)
+        card.addMoney(value = 5000)
+        printInfo(card)
+        card.pay(value = 8000)
+        printInfo(card)
+    }
 }
