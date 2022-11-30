@@ -4,26 +4,26 @@ open class BankCard (balance: Int) {
     init {
         balance_ = balance
     }
-    fun addBalance(): Int {
+    open fun addBalance() {
         val addMoney = 10
-        var newBalance = balance_ + addMoney
-        return balance_
+        balance_ = balance_ + addMoney
     }
 
-    fun pay(): Boolean {
-        val costGoods = 10
-        var pay = balance_ - costGoods
-        if (pay >= 0) {
+    open fun pay(): Boolean {
+        val costGoods = 50
+        balance_ = balance_ - costGoods
+        if (balance_ >= 0) {
+            println("purchase completed")
             return true
         }
         else
-            println("Not enought money")
+            println("not enought money")
             return false
     }
 
-    fun infoBalance () {
-        println("Money in your card ${balance_}")
+    open fun infoBalance () {
+        println("on your account ${balance_} rubles")
     }
 
-    fun infoMoney() {}
+    fun infoAboutAvalibaleFunds() {}
 }
