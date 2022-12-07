@@ -1,10 +1,9 @@
-class DebitCard (balance: Int): BankCard (balance) {
+open class DebitCard (balance: Double): BankCard (balance) {
 
-    override fun addMoney(value: Int) {
-        val addMoney = 10
-        balance_ = balance_ + addMoney
+    override fun addMoney(value: Double) {
+        balance_ = balance_ + value
     }
-    override fun pay(value: Int): Boolean {
+    override fun pay(value: Double): Boolean {
         val costGoods = 50
         balance_ = balance_ - costGoods
         if (balance_ >= 0) {

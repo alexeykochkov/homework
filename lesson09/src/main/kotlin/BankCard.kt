@@ -1,14 +1,14 @@
-open abstract class BankCard (balance: Int) {
+open abstract class BankCard (balance: Double) {
     protected var balance_ = balance
 
-    abstract fun addMoney(value: Int)
+    abstract fun addMoney(replenishment: Double)
 
-    abstract fun pay(value: Int): Boolean
+    abstract fun pay(payment: Double): Boolean
 
     open fun infoBalance () {
         println("on your account ${balance_} rubles")
     }
-    public fun getBalance (): Int {
+    public fun getBalance (): Double {
         return balance_
     }
 
