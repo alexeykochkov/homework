@@ -1,5 +1,6 @@
 fun printInfo (bankCard: BankCard) {
     bankCard.infoAboutAvalibaleFunds()
+    println("[!]")
 }
 fun main(args: Array<String>) {
     run {
@@ -13,11 +14,20 @@ fun main(args: Array<String>) {
         printInfo(card)
         card.pay(value = 8000.0)
         printInfo(card)
+        println("[!]")
     }
 
     run {
         val card = BlackAssDebitCard (balance = 100.0)
         card.addMoney(10000.0)
         printInfo(card)
+        println("[!]")
+    }
+
+    run {
+        val card = BlackAssCreditCard (balance = 200.0, credit = 15000.0)
+        card.addMoney(15000.0)
+        printInfo(card)
+        println("[!]")
     }
 }
