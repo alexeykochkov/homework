@@ -3,9 +3,8 @@ fun main(args: Array<String>) {
     var healthPoints = 89
     val isBlessed = true
     val isImmortal = false
-    val auraVisible = isBlessed && healthPoints > 50 || isImmortal
-    val auraColor = if (auraVisible) "GREEN" else "NONE"
-//    println(auraColor)
+    val auraColor = auraColore(isBlessed, healthPoints, isImmortal)
+    //    println(auraColor)
     val race = "gnome"
     val faction = when (race) {
         "dwarf" -> "Keepers of the Mines"
@@ -25,9 +24,15 @@ fun main(args: Array<String>) {
 //    } else {
 //        println("NONE")
 //    }
-    val healshStatus = formatHealthStatus(healthPoints, isBlessed)
-    println("$name $healshStatus")
-    println("(Aura: $auraColor) " + " (Blessed: ${if (isBlessed) "YES" else "NO"})")
+    val healthStatus = formatHealthStatus(healthPoints, isBlessed)
+
+    printPlayerStatus(auraColor, isBlessed, name, healthStatus)
+    castFireball()
+    printPlayerStatus(
+        healshStatus = healthStatus,
+        auraColor = "NONE",
+        name = "Madrigal",
+        isBlessed = true)
 //    val healshStatus = if (healthPoints == 100) {
 //        "is in excellent condition!"
 ////        println(name + "is in excellent condition!")
@@ -52,16 +57,33 @@ fun main(args: Array<String>) {
 //    println(name + " " + healshStatus)
 }
 
-private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
-    val healshStatus = when (healthPoints) {
+private fun printPlayerStatus(
+    auraColor: String,
+    isBlessed: Boolean,
+    name: String,
+    healshStatus: String
+) {
+    println("(Aura: $auraColor) " + " (Blessed: ${if (isBlessed) "YES" else "NO"})")
+    println("$name $healshStatus")
+}
+
+private fun auraColore(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean): String {
+    val auraVisible = isBlessed && healthPoints > 50 || isImmortal
+    val auraColor = if (auraVisible) "GREEN" else "NONE"
+    return auraColor
+}
+private fun castFireball (numFireballs: Int = 2) =
+    println("A glass of Fireball springs into existence. (x$numFireballs)")
+
+private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
+    when (healthPoints) {
         100 -> "is in excellent condition!"
         in 90..99 -> "has a few scratches."
         in 75..89 -> if (isBlessed) {
             "has some minor wounds but is healing quite quickly!"
-        } else "has some minor wounds."
-
+        } else {
+            "has some minor wounds."
+        }
         in 15..74 -> "looks pretty hurt."
         else -> " is in awful condition!"
     }
-    return healshStatus
-}
