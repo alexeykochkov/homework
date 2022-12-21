@@ -1,18 +1,11 @@
-open abstract class BankCard (balance: Double) {
-    protected var balance_ = balance
+package interfaces
+interface BankCard {
 
-    abstract fun addMoney(replenishment: Double)
+    fun addMoney(replenishment: Double)
 
-    abstract fun pay(payment: Double): Boolean
+    fun pay(payment: Double): Boolean
 
-    open fun infoBalance () {
-        println("on your account ${balance_} rubles")
-    }
-    public fun getBalance (): Double {
-        return balance_
-    }
+    fun infoBalance ()
 
-    open fun infoAboutAvalibaleFunds() {
-        infoBalance()
-    }
-}
+    fun getBalance (): Double
+ }

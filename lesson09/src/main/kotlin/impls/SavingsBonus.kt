@@ -1,4 +1,8 @@
-class SavingsBonus: Bonus () {
+package impls
+
+import Bonus
+
+class SavingsBonus: Bonus {
     override fun addMoney(replenishment: Double):Double {
         return  (replenishment * 0.005)/100
     }

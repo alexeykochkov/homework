@@ -1,4 +1,6 @@
-class BlackAssDebitCard (balance: Double): DebitCard (balance) {
+package impls
+
+class BlackAssDebitCard (balance: Double): DebitCard(balance) {
     private var bonysPay_ = 0.0
     val zeroBonus_ = CashbackBonus()
     val secondBonus_ = SavingsBonus()

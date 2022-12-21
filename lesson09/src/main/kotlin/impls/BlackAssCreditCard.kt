@@ -1,4 +1,6 @@
-class BlackAssCreditCard (balance: Double, credit: Double): CreditCard (balance,credit) {
+package impls
+
+class BlackAssCreditCard (balance: Double, credit: Double): CreditCard(balance,credit) {
     val zeroBonus_ = CashbackBonus ()
     val secondBonus_ = SavingsBonus()
 
