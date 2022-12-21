@@ -1,10 +1,13 @@
+import impls.BankCardImpl
+import interfaces.BankCard
 import kotlin.math.abs
-open class CreditCard (balance: Double, credit: Double): BankCard (balance) {
+import impls.Balance
+open class CreditCard (balance: Double, credit: Double): BankCardImpl(balance) {
     var credit_ = credit
     private val MAX_CREDIT_LIMIT_ = 10000.0
 
     init {
-        if (credit_ < MAX_CREDIT_LIMIT_ && balance_ > 0) {
+        if (credit_ < MAX_CREDIT_LIMIT_ && balance_.getBalance() > 0) {
             throw IllegalArgumentException ("Bad Argument")
         }
     }
@@ -13,22 +16,22 @@ open class CreditCard (balance: Double, credit: Double): BankCard (balance) {
         var newCredit = credit_ + addMoney
         var overMoney = newCredit - MAX_CREDIT_LIMIT_
         if (overMoney > 0) {
-            balance_ = balance_ + overMoney
+            balance_.add(overMoney)
             credit_ = MAX_CREDIT_LIMIT_
         } else {
 // проверка дабл на 0
-            check(abs (balance_) < 1e-5)
+            check(abs (balance_.getBalance()) < 1e-5)
             credit_ = newCredit
         }
     }
 
     override fun pay(value: Double): Boolean {
         val payMoney = 8000
-        var newBalance = balance_ - payMoney
+        var newBalance = balance_.getBalance() - payMoney
         if (newBalance >= 0) {
-            balance_ = newBalance
+            balance_ = Balance(newBalance)
         } else {
-            balance_ = 0.0
+            balance_ = Balance(0.0)
             credit_ = credit_ + newBalance
         }
         return true

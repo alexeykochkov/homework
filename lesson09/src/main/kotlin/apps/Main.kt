@@ -1,5 +1,10 @@
+import impls.BlackAssDebitCard
+import impls.CreditCard
+import impls.DebitCard
+import interfaces.BankCard
+
 fun printInfo (bankCard: BankCard) {
-    bankCard.infoAboutAvalibaleFunds()
+    bankCard.infoBalance()
 }
 fun main(args: Array<String>) {
     run {
@@ -19,5 +24,11 @@ fun main(args: Array<String>) {
         val card = BlackAssDebitCard (balance = 100.0)
         card.addMoney(10000.0)
         printInfo(card)
+        val payment = 17000.0
+        if (card.getBalance() < payment) {
+            println("no money")
+            card.addMoney(18000.0)
+        }
+        card.pay(payment)
     }
 }

@@ -1,4 +1,4 @@
-class CashbackBonus: Bonus() {
+class CashbackBonus: Bonus {
     override fun addMoney(replenishment: Double):Double {
         return 0.0
     }
